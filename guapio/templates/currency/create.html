@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                  {% block title %}Crear nueva moneda{% endblock %}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="title">Nombre</label>
+                                <input class="form-control" name="title" id="title" value="{{ request.form['title'] }}" placeholder="Ingrese Nombre" required>
+                                <p class="help-block">Ingrese el nombre de la moneda.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="code">Simbolo</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="google-wallet" checked><i class="fa fa-google-wallet fa-fw"></i> Google Wallet
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="bitcoin"><i class="fa fa-bitcoin fa-fw"></i> Bitcoin
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="yen"><i class="fa fa-yen fa-fw"></i> Yen
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="won"><i class="fa fa-won fa-fw"></i> Won
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="shekel"><i class="fa fa-shekel fa-fw"></i> Séquel israelí
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="pound"><i class="fa fa-gbp fa-fw"></i> Libra esterlina
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="ruble"><i class="fa fa-ruble fa-fw"></i> Rublo
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="rupee"><i class="fa fa-rupee fa-fw"></i> Rupia
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="lira"><i class="fa fa-try fa-fw"></i> Lira
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="euro"><i class="fa fa-euro fa-fw"></i> Euro
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="dollar"><i class="fa fa-dollar fa-fw"></i> Dolar
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="other"> Otro
+                                    </label>
+                                </div>
+                                <p class="help-block">Puede seleccionar el simbolo correspondiente a la moneda, en caso de que el simbolo no esté en el listado, seleccione 'Otro'.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="purchase_rate">Tasa de compra</label>
+                                <input type="text" class="form-control"  name="purchase_rate" id="purchase_rate" value="{{ request.form['purchase_rate'] }}" placeholder="Ingresar tasa de compra" required>
+                                <p class="help-block">Ingrese una tasa de compra correspondiente a una moneda global. De lo contrario, ingrese 1 para no mostrar esta tasa.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="sale_rate">Tasa de venta</label>
+                                <input type="text" class="form-control"  name="sale_rate" id="sale_rate" value="{{ request.form['sale_rate'] }}" placeholder="Ingresar tasa de venta" required>
+                                <p class="help-block">Ingrese una tasa de venta correspondiente a una moneda global. De lo contrario, ingrese 1 para no mostrar esta tasa.</p>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-default">Crear moneda</button>
+                            <button type="reset" class="btn btn-primary btn-default">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

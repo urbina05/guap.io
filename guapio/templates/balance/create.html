@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block header %} Create currency {% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                  {% block title %}Create a new currency{% endblock %}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="title">Name</label>
+                                <input class="form-control" name="title" id="title" value="{{ request.form['title'] }}" placeholder="Enter name" required>
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="code">Symbol</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="google-wallet" checked><i class="fa fa-google-wallet fa-fw"></i> Google Wallet
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="bitcoin"><i class="fa fa-bitcoin fa-fw"></i> Bitcoin
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="yen"><i class="fa fa-yen fa-fw"></i> Yen
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="won"><i class="fa fa-won fa-fw"></i> Won
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="shekel"><i class="fa fa-shekel fa-fw"></i> Shekel
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="pound"><i class="fa fa-gbp fa-fw"></i> Pound
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="ruble"><i class="fa fa-ruble fa-fw"></i> Ruble
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="rupee"><i class="fa fa-rupee fa-fw"></i> Rupee
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="lira"><i class="fa fa-try fa-fw"></i> Lira
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="euro"><i class="fa fa-euro fa-fw"></i> Euro
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="dollar"><i class="fa fa-dollar fa-fw"></i> Dollar
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="code" id="optionsRadios1" value="other"> Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rate">Rate</label>
+                                <input type="number" class="form-control"  name="rate" id="rate" value="{{ request.form['rate'] }}" placeholder="Enter rate" required>
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                            <button type="submit" class="btn btn-default">Save currency</button>
+                            <a href="{{ url_for('currency.index') }}" class="btn btn-default">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

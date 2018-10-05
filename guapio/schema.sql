@@ -1,0 +1,53 @@
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS post;
+CREATE TABLE post (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    body TEXT NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES user (id)
+);
+
+DROP TABLE IF EXISTS currency;
+CREATE TABLE currency (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    title TEXT NOT NULL,
+    code TEXT NOT NULL,
+    purchase_rate FLOAT NOT NULL,
+    sale_rate FLOAT NOT NULL
+);
+
+DROP TABLE IF EXISTS balance;
+CREATE TABLE balance (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    balance FLOAT NOT NULL DEFAULT 0.0,
+    currency_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (currency_id) REFERENCES currency (id),
+    FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+DROP TABLE IF EXISTS user_move;
+CREATE TABLE user_move (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    amount FLOAT NOT NULL,
+    comment TEXT,
+    currency_id INTEGER NOT NULL,
+    sender_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (currency_id) REFERENCES currency (id),
+    FOREIGN KEY (sender_id) REFERENCES user (id),
+    FOREIGN KEY (receiver_id) REFERENCES user (id)
+);
