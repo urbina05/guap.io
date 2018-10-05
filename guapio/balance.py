@@ -132,16 +132,12 @@ def load(currency_id):
     """Update a balance if the current user is the author."""
     balance = get_current_balance_from_user_id(g.user['id'], currency_id)
 
-    print balance.keys()
-
     if request.method == 'POST':
         balance_id = request.form['id']
         error = None
 
         if error is not None:
             flash(error)
-
-        print balance_id
 
         if balance_id:
             update(id=balance_id)
