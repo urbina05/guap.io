@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
-{% block header %} Create currency {% endblock %}
 {% block content %}
 
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                  {% block title %}Create a new currency{% endblock %}
+                  {% block title %}Enviar dinero{% endblock %}
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <form method="post">
                             <div class="form-group">
-                                <label for="title">Name</label>
-                                <input class="form-control" name="title" id="title" value="{{ request.form['title'] }}" placeholder="Enter name" required>
-                                <p class="help-block">Example block-level help text here.</p>
+                                <label for="amount">Monto</label>
+                                <input class="form-control" name="amount" id="amount" value="{{ request.form['amount'] }}" placeholder="Ingresar monto" required>
+                                <p class="help-block">Ingrese el monto que desea enviar.</p>
                             </div>
                             <div class="form-group">
-                                <label for="code">Symbol</label>
+                                <label for="receiver_id">Usuario</label>
+                                <input type="number" class="form-control"  name="receiver_id" id="receiver_id" value="{{ request.form['rate'] }}" placeholder="Seleccionar usuario" required>
+                                <p class="help-block">Seleccione el usuario que recibirá el dinero.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="currency_id">Moneda</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="code" id="optionsRadios1" value="google-wallet" checked><i class="fa fa-google-wallet fa-fw"></i> Google Wallet
+                                        <input type="radio" name="currency_id" id="optionsRadios1" value="google-wallet" checked><i class="fa fa-google-wallet fa-fw"></i> Google Wallet
                                     </label>
                                 </div>
                                 <div class="radio">
@@ -80,13 +84,8 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="rate">Rate</label>
-                                <input type="number" class="form-control"  name="rate" id="rate" value="{{ request.form['rate'] }}" placeholder="Enter rate" required>
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>
-                            <button type="submit" class="btn btn-default">Save currency</button>
-                            <a href="{{ url_for('currency.index') }}" class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-default">Enviar</button>
+                            <a href="{{ url_for('currency.index') }}" class="btn btn-default">Cancelar</a>
                         </form>
                     </div>
                 </div>

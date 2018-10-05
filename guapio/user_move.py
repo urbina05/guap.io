@@ -58,12 +58,12 @@ def get_user_moves_from_user(user_id=None):
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    if requesm.method == 'POST':
-        amount = requesm.form['amount']
-        comment = requesm.form['comment']
-        sender_id = requesm.form['sender_id']
-        receiver_id = requesm.form['receiver_id']
-        currency_id = requesm.form['currency_id']
+    if request.method == 'POST':
+        amount = request.form['amount']
+        comment = request.form['comment']
+        sender_id = request.form['sender_id']
+        receiver_id = request.form['receiver_id']
+        currency_id = request.form['currency_id']
         error = None
 
         if not amount:
@@ -96,8 +96,8 @@ def create():
 def update(id):
     user_move = get_user_move(id)
 
-    if requesm.method == 'POST':
-        amount = requesm.form['amount']
+    if request.method == 'POST':
+        amount = request.form['amount']
         error = None
 
         if not amount:
