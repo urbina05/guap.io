@@ -11,7 +11,7 @@ bp = Blueprint('balance', __name__, url_prefix='/balance')
 
 @bp.route('/')
 def index():
-    """Show all the balances, most recent first."""
+
     db = get_db()
     balances = db.execute(
         'SELECT b.id, balance, user_id, currency_id, b.created'
@@ -22,17 +22,7 @@ def index():
 
 
 def get_balance(id, check_author=True):
-    """Get a balance by id.
 
-    Checks that the id exists and optionally that the current user is
-    the author.
-
-    :param id: id of balance to get
-    :param check_author: require the current user to be the author
-    :return: the balance with author information
-    :raise 404: if a balance with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
     balance = get_db().execute(
         'SELECT b.id, balance, user_id, currency_id, b.created'
         ' FROM balance b JOIN currency c ON b.currency_id = c.id'
@@ -49,17 +39,7 @@ def get_balance(id, check_author=True):
     return balance
 
 def get_current_balance_from_user_id(user_id=None, currency_id=None):
-    """Get a balance by user id.
 
-    Checks that the id exists and optionally that the current user is
-    the author.
-
-    :param id: id of balance to get
-    :param check_author: require the current user to be the author
-    :return: the balance with author information
-    :raise 404: if a balance with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
     if user_id is None:
         user_id = g.user['id']
 
@@ -98,7 +78,7 @@ def get_current_balance_from_user_id(user_id=None, currency_id=None):
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    """Create a new balance for the current user."""
+
     if request.method == 'POST':
         balance = request.form['balance']
         user_id = request.form['user_id']
@@ -129,7 +109,7 @@ def create():
 @bp.route('/<int:currency_id>/load', methods=('GET', 'POST'))
 @login_required
 def load(currency_id):
-    """Update a balance if the current user is the author."""
+
     balance = get_current_balance_from_user_id(g.user['id'], currency_id)
 
     if request.method == 'POST':
@@ -152,7 +132,7 @@ def load(currency_id):
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    """Update a balance if the current user is the author."""
+
     balance = get_balance(id)
 
     if request.method == 'POST':
@@ -179,11 +159,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('balance',))
 @login_required
 def delete(id):
-    """Delete a balance.
 
-    Ensures that the balance exists and that the logged in user is the
-    author of the balance.
-    """
     get_balance(id)
     db = get_db()
     db.execute('DELETE FROM balance WHERE id = ?', (id,))

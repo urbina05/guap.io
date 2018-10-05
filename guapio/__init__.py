@@ -28,14 +28,9 @@ def create_app(test_config=None):
     from guapio import db
     db.init_app(app)
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-
     # apply the blueprints to the app
     from guapio import auth, blog, currency, balance, user_move
-    # , currency, balance, transaction
+
     app.register_blueprint(auth.bp)
     app.register_blueprint(blog.bp)
     app.register_blueprint(currency.bp)

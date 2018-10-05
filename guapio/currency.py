@@ -19,24 +19,10 @@ def get_currencies():
 
 @bp.route('/')
 def index():
-    """Show all the currencies, most recent first."""
-
     return render_template('currency/index.html', currencies=get_currencies())
 
 
-
 def get_currency(id, check_author=True):
-    """Get a currency and its author by id.
-
-    Checks that the id exists and optionally that the current user is
-    the author.
-
-    :param id: id of currency to get
-    :param check_author: require the current user to be the author
-    :return: the currency with author information
-    :raise 404: if a currency with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
     currency = get_db().execute(
         'SELECT c.id,  title, code, created, purchase_rate, sale_rate'
         ' FROM currency c'
@@ -53,7 +39,6 @@ def get_currency(id, check_author=True):
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    """Create a new currency for the current user."""
     if request.method == 'POST':
         title = request.form['title']
         code = request.form['code']
@@ -88,7 +73,6 @@ def create():
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    """Update a currency if the current user is the author."""
     currency = get_currency(id)
 
     if request.method == 'POST':
@@ -125,11 +109,6 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    """Delete a currency.
-
-    Ensures that the currency exists and that the logged in user is the
-    author of the currency.
-    """
     get_currency(id)
     db = get_db()
     db.execute('DELETE FROM currency WHERE id = ?', (id,))

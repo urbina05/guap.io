@@ -11,7 +11,6 @@ bp = Blueprint('user_move', __name__, url_prefix='/user_move')
 
 @bp.route('/')
 def index():
-    """Show all the user_moves, most recent firsm."""
     db = get_db()
     user_moves = db.execute(
         'SELECT'
@@ -23,17 +22,6 @@ def index():
 
 
 def get_user_move(id):
-    """Get a user_move by id.
-
-    Checks that the id exists and optionally that the current user is
-    the author.
-
-    :param id: id of user_move to get
-    :param check_author: require the current user to be the author
-    :return: the user_move with author information
-    :raise 404: if a user_move with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
     user_move = get_db().execute(
         'SELECT'
         ' m.id, amount, comment, currency_id, sender_id, receiver_id, created'
@@ -46,18 +34,6 @@ def get_user_move(id):
 
 
 def get_user_moves_from_user(user_id=None):
-    """Get a user_move by user id.
-
-    Checks that the id exists and optionally that the current user is
-    the author.
-
-    :param id: id of user_move to get
-    :param check_author: require the current user to be the author
-    :return: the user_move with author information
-    :raise 404: if a user_move with the given id doesn't exist
-    :raise 403: if the current user isn't the author
-    """
-
     if user_id is None:
         user_id = g.user['id']
 
@@ -82,7 +58,6 @@ def get_user_moves_from_user(user_id=None):
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    """Create a new user_move for the current user."""
     if requesm.method == 'POST':
         amount = requesm.form['amount']
         comment = requesm.form['comment']
@@ -119,7 +94,6 @@ def create():
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    """Update a user_move if the current user is the author."""
     user_move = get_user_move(id)
 
     if requesm.method == 'POST':
@@ -146,11 +120,6 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('user_move',))
 @login_required
 def delete(id):
-    """Delete a user_move.
-
-    Ensures that the user_move exists and that the logged in user is the
-    author of the user_move.
-    """
     get_user_move(id)
     db = get_db()
     db.execute('DELETE FROM user_move WHERE id = ?', (id,))
