@@ -35,7 +35,7 @@ def get_balance(id, check_author=True):
     """
     balance = get_db().execute(
         'SELECT b.id, balance, user_id, currency_id, b.created'
-        ' FROM balance b JOIN user u ON b.user_id = u.id JOIN currency c ON b.currency_id = c.id'
+        ' FROM balance b JOIN currency c ON b.currency_id = c.id'
         ' WHERE b.id = ?',
         (id,)
     ).fetchone()
